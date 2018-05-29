@@ -9,17 +9,20 @@ public class Controlls : MonoBehaviour {
 	public LayerMask ground;
 	public float maxSpeed = 8.0f;
 
+	private GameObject AudioSource;
 	private Animator animator;
 	private Rigidbody2D rgbd2d;
 	private SpriteRenderer sr;
-	//private BoxCollider2D bc2d;
 	private bool canDoubleJump = true;
+	private MusicControll musicControll;
 
 	// Use this for initialization
 	void Start () {
 		animator = GetComponent<Animator>();
 		rgbd2d = GetComponent<Rigidbody2D>();
 		sr = GetComponent<SpriteRenderer>();
+		AudioSource = GameObject.FindGameObjectWithTag("AudioSource");
+		musicControll = AudioSource.GetComponent<MusicControll>();
 		//bc2d = GetComponent<BoxCollider2D>();
 	}
 	
@@ -102,6 +105,7 @@ public class Controlls : MonoBehaviour {
 	}
 
 	void Jump(){
+		musicControll.playJumpSound();
 		rgbd2d.AddForce(new Vector2(0,jumpPower));
 	}
 
