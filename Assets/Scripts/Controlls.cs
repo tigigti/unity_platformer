@@ -7,7 +7,7 @@ public class Controlls : MonoBehaviour {
 	public float jumpPower = 330.0f;
 	public bool playerOnGround;
 	public LayerMask ground;
-	public float maxSpeed = 8.0f;
+	public float maxSpeed = 10.0f;
 
 	private Animator animator;
 	private Rigidbody2D rgbd2d;
