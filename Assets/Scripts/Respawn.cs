@@ -7,7 +7,7 @@ public class Respawn : MonoBehaviour {
 
 	void  FixedUpdate () {
 		if (transform.position.y < threshold)
-			transform.position = new Vector3(0, 0, 0);
+			Application.LoadLevel(Application.loadedLevel);
 	}
 
 }
