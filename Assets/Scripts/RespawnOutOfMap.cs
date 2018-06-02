@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Respawn : MonoBehaviour {
+public class RespawnOutOfMap : MonoBehaviour {
 	public float threshold;
 
 	void  FixedUpdate () {
