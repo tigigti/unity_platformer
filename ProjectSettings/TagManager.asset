@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 2
   tags:
   - AudioSource
+  - Trigger
   layers:
   - Default
   - TransparentFX
