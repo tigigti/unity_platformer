@@ -6,7 +6,7 @@ public class CollisionTrigger : MonoBehaviour {
 	
 		void OnTriggerEnter2D(Collider2D other) {
           if(other.gameObject.tag == "Player")
-		  	Application.LoadLevel(Application.loadedLevel);
+		  	other.transform.position = new Vector2(25.0f,-2.462f);
 
 		}
 	}
