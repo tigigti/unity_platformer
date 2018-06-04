@@ -16,6 +16,12 @@ public class Controlls : MonoBehaviour {
 	private bool canDoubleJump = true;
 	private MusicControll musicControll;
 
+	public float knockback;
+	public float knockbackLength;
+	public float knockbackCount;
+	public bool knockFromRight;
+
+
 	// Use this for initialization
 	void Start () {
 		animator = GetComponent<Animator>();
@@ -28,6 +34,8 @@ public class Controlls : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+
+		if (knockbackCount <= 0){
 		// Move Player if Directional Input is pressed
 		float inputSpeed = Input.GetAxisRaw("Horizontal");
 
@@ -64,7 +72,7 @@ public class Controlls : MonoBehaviour {
 			Jump();
 			canDoubleJump = false;
 		}
-
+		
 		
 		
 
@@ -102,6 +110,14 @@ public class Controlls : MonoBehaviour {
 
 		//handleBoxCollider();
 		
+	}
+	else {
+		if(knockFromRight)
+		rgbd2d.velocity = new Vector2(-knockback,knockback);
+		if(!knockFromRight)
+		rgbd2d.velocity = new Vector2(knockback,knockback);
+		knockbackCount -= Time.deltaTime;
+		}
 	}
 
 	void Jump(){
