@@ -37,86 +37,86 @@ public class Controlls : MonoBehaviour {
 
 		if (knockbackCount <= 0){
 		// Move Player if Directional Input is pressed
-		float inputSpeed = Input.GetAxisRaw("Horizontal");
+			float inputSpeed = Input.GetAxisRaw("Horizontal");
 
-		// Check if Maximum speed reached
-		if(rgbd2d.velocity.x < maxSpeed && rgbd2d.velocity.x > -1*maxSpeed){
-			rgbd2d.AddForce(new Vector2(playerSpeed * inputSpeed,0));
-		}
-		// Turn the Sprite around when changing Directions, but leave it as is if no input (speed = 0)
-		if(inputSpeed < 0 ){
-			sr.flipX = true;
-		}
-		if(inputSpeed > 0){
-			sr.flipX = false;
-		}
-		
-		// Stop moving when Keys released on Ground
-		if(playerOnGround && inputSpeed == 0){
-			stopHorizontalMovement();
-		}
+			// Check if Maximum speed reached
+			if(rgbd2d.velocity.x < maxSpeed && rgbd2d.velocity.x > -1*maxSpeed){
+				rgbd2d.AddForce(new Vector2(playerSpeed * inputSpeed,0));
+			}
+			// Turn the Sprite around when changing Directions, but leave it as is if no input (speed = 0)
+			if(inputSpeed < 0 ){
+				sr.flipX = true;
+			}
+			if(inputSpeed > 0){
+				sr.flipX = false;
+			}
+			
+			// Stop moving when Keys released on Ground
+			if(playerOnGround && inputSpeed == 0){
+				stopHorizontalMovement();
+			}
 
-		if(rgbd2d.velocity.x < 0 && inputSpeed > 0 || rgbd2d.velocity.x > 0 && inputSpeed < 0){
-			stopHorizontalMovement();
-		}
+			if(rgbd2d.velocity.x < 0 && inputSpeed > 0 || rgbd2d.velocity.x > 0 && inputSpeed < 0){
+				stopHorizontalMovement();
+			}
 
-		// Jump on Up Arrow
-		if(Input.GetKeyDown(KeyCode.UpArrow) && playerOnGround){
-			Jump();
-		}
+			// Jump on Up Arrow
+			if(Input.GetKeyDown(KeyCode.UpArrow) && playerOnGround){
+				Jump();
+			}
 
-		// Double Jump Check
-		if(Input.GetKeyDown(KeyCode.UpArrow) && !playerOnGround && canDoubleJump){
-			// Set Vertical Velocity to 0 to jump at maximum Power ignoring gravit
-			rgbd2d.velocity = new Vector2(rgbd2d.velocity.x, 0);
-			Jump();
-			canDoubleJump = false;
-		}
-		
-		
-		
+			// Double Jump Check
+			if(Input.GetKeyDown(KeyCode.UpArrow) && !playerOnGround && canDoubleJump){
+				// Set Vertical Velocity to 0 to jump at maximum Power ignoring gravit
+				rgbd2d.velocity = new Vector2(rgbd2d.velocity.x, 0);
+				Jump();
+				canDoubleJump = false;
+			}
+			
+			
+			
 
-		// Check if player hits the ground and change values
-		RaycastHit2D hit = Physics2D.Raycast(transform.position,new Vector2(0,-1.1f),1.1f,ground);
-		if((hit.collider != null) == true){
-			playerOnGround = true;
-			canDoubleJump = true;
-		}
-		else {
-			playerOnGround = false;
-		}
-
-		// Handle Animation on Ground
-		if(playerOnGround){
-			if(inputSpeed != 0){
-				animator.SetInteger("state",1);
+			// Check if player hits the ground and change values
+			RaycastHit2D hit = Physics2D.Raycast(transform.position,new Vector2(0,-1.1f),1.1f,ground);
+			if((hit.collider != null) == true){
+				playerOnGround = true;
+				canDoubleJump = true;
 			}
 			else {
-				animator.SetInteger("state",0);
+				playerOnGround = false;
 			}
-		}
-		
-		// Handle Animation mid-air
-		if(!playerOnGround){
-			if(rgbd2d.velocity.y > 0){
-				// Player is going up
-				animator.SetInteger("state",2);
-			}
-			else {
-				// Player is falling
-				animator.SetInteger("state",3);
-			}
-		}
 
-		//handleBoxCollider();
+			// Handle Animation on Ground
+			if(playerOnGround){
+				if(inputSpeed != 0){
+					animator.SetInteger("state",1);
+				}
+				else {
+					animator.SetInteger("state",0);
+				}
+			}
+			
+			// Handle Animation mid-air
+			if(!playerOnGround){
+				if(rgbd2d.velocity.y > 0){
+					// Player is going up
+					animator.SetInteger("state",2);
+				}
+				else {
+					// Player is falling
+					animator.SetInteger("state",3);
+				}
+			}
+
+			//handleBoxCollider();
 		
 	}
 	else {
 		if(knockFromRight)
-		rgbd2d.velocity = new Vector2(-knockback,knockback);
+			rgbd2d.velocity = new Vector2(-knockback,knockback);
 		if(!knockFromRight)
-		rgbd2d.velocity = new Vector2(knockback,knockback);
-		knockbackCount -= Time.deltaTime;
+			rgbd2d.velocity = new Vector2(knockback,knockback);
+			knockbackCount -= Time.deltaTime;
 		}
 	}
 
@@ -126,7 +126,7 @@ public class Controlls : MonoBehaviour {
 	}
 
 	void stopHorizontalMovement(){
-			rgbd2d.velocity = new Vector2(0, rgbd2d.velocity.y);
+		rgbd2d.velocity = new Vector2(0, rgbd2d.velocity.y);
 	}
 
 	// Change Bounds of BoxCollider in Air to better fit the Sprite
