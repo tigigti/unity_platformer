@@ -6,6 +6,8 @@ public class Controlls : MonoBehaviour {
 	public float playerSpeed = 20.0f;
 	public float jumpPower = 330.0f;
 	public bool playerOnGround;
+	public bool isWalking;
+	public bool facingRight = true;
 	public LayerMask ground;
 	public float maxSpeed = 8.0f;
 
@@ -39,9 +41,17 @@ public class Controlls : MonoBehaviour {
 		// Turn the Sprite around when changing Directions, but leave it as is if no input (speed = 0)
 		if(inputSpeed < 0 ){
 			sr.flipX = true;
+			facingRight = false;
+			isWalking = true;
 		}
 		if(inputSpeed > 0){
 			sr.flipX = false;
+			facingRight = true;
+			isWalking = true;
+		}
+
+		if(inputSpeed == 0){
+			isWalking = false;
 		}
 		
 		// Stop moving when Keys released on Ground
@@ -109,6 +119,10 @@ public class Controlls : MonoBehaviour {
 
 	void stopHorizontalMovement(){
 		rgbd2d.velocity = new Vector2(0, rgbd2d.velocity.y);
+	}
+
+	public Rigidbody2D getRigidbody(){
+		return rgbd2d;
 	}
 
 	// Change Bounds of BoxCollider in Air to better fit the Sprite
